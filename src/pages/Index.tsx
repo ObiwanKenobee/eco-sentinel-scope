@@ -1,10 +1,22 @@
 
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import QueryBox from "@/components/QueryBox";
 import Stats from "@/components/Stats";
 import RecentActivity from "@/components/RecentActivity";
-import { Shield } from "lucide-react";
+import { Shield, ArrowRight, Map, BarChart3, Bell } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Index = () => {
+  const [selectedSpecies, setSelectedSpecies] = useState<string | null>(null);
+
+  const speciesCards = [
+    { name: "Elephants", risk: "High", region: "Africa", trend: "-12%" },
+    { name: "Tigers", risk: "Critical", region: "Asia", trend: "-8%" },
+    { name: "Rhinos", risk: "High", region: "Africa", trend: "-15%" },
+  ];
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
@@ -15,7 +27,7 @@ const Index = () => {
             <Shield className="w-6 h-6 text-primary mr-2" />
             <span className="text-sm font-medium">Wildlife Protection Intelligence</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-gradient-primary">
             Combat Wildlife Crime with AI
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -26,9 +38,88 @@ const Index = () => {
         <QueryBox />
       </section>
 
+      {/* Quick Access Cards */}
+      <section className="container py-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <Link to="/analytics">
+            <Card className="hover:bg-accent/50 transition-colors group cursor-pointer">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  <span>View Analytics</span>
+                  <BarChart3 className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                </CardTitle>
+                <CardDescription>
+                  Analyze trafficking patterns and trends
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
+          <Card className="hover:bg-accent/50 transition-colors group cursor-pointer">
+            <CardHeader>
+              <CardTitle className="flex items-center justify-between">
+                <span>Global Map</span>
+                <Map className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+              </CardTitle>
+              <CardDescription>
+                Track wildlife crime hotspots worldwide
+              </CardDescription>
+            </CardHeader>
+          </Card>
+          <Card className="hover:bg-accent/50 transition-colors group cursor-pointer">
+            <CardHeader>
+              <CardTitle className="flex items-center justify-between">
+                <span>Alert System</span>
+                <Bell className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+              </CardTitle>
+              <CardDescription>
+                Set up custom notifications for incidents
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        </div>
+      </section>
+
       {/* Stats Section */}
       <section className="container py-12">
         <Stats />
+      </section>
+
+      {/* Species at Risk Section */}
+      <section className="container py-12">
+        <h2 className="text-2xl font-bold mb-6">Species at Risk</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          {speciesCards.map((species) => (
+            <Card 
+              key={species.name}
+              className={`cursor-pointer transition-all hover:scale-105 ${
+                selectedSpecies === species.name ? 'ring-2 ring-primary' : ''
+              }`}
+              onClick={() => setSelectedSpecies(species.name)}
+            >
+              <CardContent className="pt-6">
+                <div className="text-xl font-semibold mb-2">{species.name}</div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <div className="text-sm text-muted-foreground">Risk Level</div>
+                    <div className={`font-medium ${
+                      species.risk === 'Critical' ? 'text-destructive' : 'text-warning'
+                    }`}>
+                      {species.risk}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-sm text-muted-foreground">Population Trend</div>
+                    <div className="font-medium text-destructive">{species.trend}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm text-muted-foreground">Region</div>
+                    <div className="font-medium">{species.region}</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </section>
 
       {/* Recent Activity Section */}
@@ -40,15 +131,18 @@ const Index = () => {
           <div className="glass-card p-6">
             <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
             <div className="space-y-3">
-              <button className="w-full px-4 py-3 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity">
+              <Button className="w-full justify-between" variant="default">
                 Generate Report
-              </button>
-              <button className="w-full px-4 py-3 rounded-lg bg-accent text-accent-foreground hover:bg-accent/80 transition-colors">
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+              <Button className="w-full justify-between" variant="secondary">
                 View Alerts
-              </button>
-              <button className="w-full px-4 py-3 rounded-lg bg-accent text-accent-foreground hover:bg-accent/80 transition-colors">
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+              <Button className="w-full justify-between" variant="outline">
                 Analyze Patterns
-              </button>
+                <ArrowRight className="w-4 h-4" />
+              </Button>
             </div>
           </div>
         </div>
