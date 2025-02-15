@@ -1,7 +1,7 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Brain, Network, Bell, ArrowRight, Shield, Bot, Activity } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const Agents = () => {
   const agentDetails = [
@@ -55,10 +55,11 @@ const Agents = () => {
     }
   ];
 
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="container py-12">
-        {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center p-2 rounded-full bg-accent mb-6">
             <Bot className="w-6 h-6 text-primary mr-2" />
@@ -69,8 +70,6 @@ const Agents = () => {
             Our intelligent agents work together to create a comprehensive wildlife protection system
           </p>
         </div>
-
-        {/* Agent Cards */}
         <div className="grid grid-cols-1 gap-8">
           {agentDetails.map((agent) => (
             <Card key={agent.id} className="group transition-all duration-300">
@@ -87,7 +86,11 @@ const Agents = () => {
                       </CardDescription>
                     </div>
                   </div>
-                  <Button variant="outline" className="gap-2">
+                  <Button 
+                    variant="outline" 
+                    className="gap-2"
+                    onClick={() => navigate(`/agents/${agent.id}`)}
+                  >
                     View Details
                     <ArrowRight className="w-4 h-4" />
                   </Button>
@@ -95,7 +98,6 @@ const Agents = () => {
               </CardHeader>
               <CardContent className="p-6 pt-0">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Features */}
                   <div className="space-y-3">
                     <h3 className="font-semibold flex items-center gap-2">
                       <Shield className="w-4 h-4 text-primary" />
@@ -110,7 +112,6 @@ const Agents = () => {
                       ))}
                     </ul>
                   </div>
-                  {/* Metrics */}
                   <div className="space-y-3">
                     <h3 className="font-semibold flex items-center gap-2">
                       <Activity className="w-4 h-4 text-primary" />
