@@ -1,9 +1,12 @@
-
 import { useParams, Link } from 'react-router-dom';
-import { Brain, ArrowLeft, Shield, Network, Activity, ChartLine, Map, Bell, ArrowRight } from 'lucide-react';
+import { Brain, ArrowLeft, Shield, Network, Activity, ChartLine, Map, Bell, ArrowRight, Settings2, Sliders, Terminal, Webhook, Database, Lock, Users, AlertTriangle } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import TraffickingMap from "@/components/analytics/TraffickingMap";
+import RiskAlerts from "@/components/analytics/RiskAlerts";
+import SupplyChain from "@/components/analytics/SupplyChain";
+import TrendAnalysis from "@/components/analytics/TrendAnalysis";
 
 const AgentDetail = () => {
   const { id } = useParams();
@@ -43,7 +46,6 @@ const AgentDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header Banner */}
       <div className="bg-accent/50 border-b">
         <div className="container py-8">
           <div className="flex items-center gap-2 mb-6">
@@ -80,7 +82,6 @@ const AgentDetail = () => {
           </TabsList>
 
           <TabsContent value="overview" className="space-y-8">
-            {/* Feature Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {witAiFeatures.map((feature, index) => (
                 <Card key={index} className="group hover:bg-accent/50 transition-all duration-300">
@@ -105,7 +106,6 @@ const AgentDetail = () => {
               ))}
             </div>
 
-            {/* Performance Metrics */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -135,7 +135,6 @@ const AgentDetail = () => {
               </CardContent>
             </Card>
 
-            {/* Quick Actions */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Card>
                 <CardHeader>
@@ -179,32 +178,249 @@ const AgentDetail = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="features">
-            {/* Feature content will be implemented in next iteration */}
-            <Card>
-              <CardContent className="p-6">
-                <p className="text-muted-foreground">Feature details coming soon...</p>
-              </CardContent>
-            </Card>
+          <TabsContent value="features" className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Webhook className="w-5 h-5 text-primary" />
+                    <CardTitle>API Integration</CardTitle>
+                  </div>
+                  <CardDescription>Connect with external data sources</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-accent/50">
+                    <div>
+                      <div className="font-medium">Guardian-IO API</div>
+                      <div className="text-sm text-muted-foreground">Supply chain data integration</div>
+                    </div>
+                    <Button variant="outline" size="sm">Configure</Button>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-accent/50">
+                    <div>
+                      <div className="font-medium">Wildlife Database</div>
+                      <div className="text-sm text-muted-foreground">Species tracking system</div>
+                    </div>
+                    <Button variant="outline" size="sm">Configure</Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Terminal className="w-5 h-5 text-primary" />
+                    <CardTitle>Model Configuration</CardTitle>
+                  </div>
+                  <CardDescription>AI model settings and parameters</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-accent/50">
+                    <div>
+                      <div className="font-medium">GraphRAG Model</div>
+                      <div className="text-sm text-muted-foreground">Network analysis parameters</div>
+                    </div>
+                    <Button variant="outline" size="sm">Adjust</Button>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-accent/50">
+                    <div>
+                      <div className="font-medium">Prediction Engine</div>
+                      <div className="text-sm text-muted-foreground">Route mapping settings</div>
+                    </div>
+                    <Button variant="outline" size="sm">Adjust</Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Database className="w-5 h-5 text-primary" />
+                    <CardTitle>Data Management</CardTitle>
+                  </div>
+                  <CardDescription>Data storage and processing settings</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-accent/50">
+                    <div>
+                      <div className="font-medium">Storage Configuration</div>
+                      <div className="text-sm text-muted-foreground">12.8 TB Used</div>
+                    </div>
+                    <Button variant="outline" size="sm">Manage</Button>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-accent/50">
+                    <div>
+                      <div className="font-medium">Data Retention</div>
+                      <div className="text-sm text-muted-foreground">90 Days</div>
+                    </div>
+                    <Button variant="outline" size="sm">Configure</Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Activity className="w-5 h-5 text-primary" />
+                    <CardTitle>Integration Status</CardTitle>
+                  </div>
+                  <CardDescription>System connections and health</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-success/20">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-success" />
+                      <div className="font-medium">Law Enforcement API</div>
+                    </div>
+                    <span className="text-sm text-success">Operational</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-warning/20">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-warning" />
+                      <div className="font-medium">Border Control System</div>
+                    </div>
+                    <span className="text-sm text-warning">Degraded</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
 
-          <TabsContent value="analytics">
-            {/* Analytics content will be implemented in next iteration */}
-            <Card>
-              <CardContent className="p-6">
-                <p className="text-muted-foreground">Analytics dashboard coming soon...</p>
-              </CardContent>
-            </Card>
+          <TabsContent value="analytics" className="space-y-6">
+            <div className="grid grid-cols-1 gap-6">
+              <TraffickingMap />
+              <TrendAnalysis 
+                species={[
+                  { id: 1, name: "Pangolin", risk: "High Risk" },
+                  { id: 2, name: "Rhino", risk: "High Risk" },
+                  { id: 3, name: "Tiger", risk: "High Risk" }
+                ]}
+                routes={[
+                  { id: 1, route: "Southeast Asia → China", status: "Active" },
+                  { id: 2, route: "Africa → Vietnam", status: "Active" }
+                ]}
+                onDeleteSpecies={() => {}}
+                onDeleteRoute={() => {}}
+              />
+              <RiskAlerts 
+                alerts={[
+                  { id: 1, title: "Increased Activity", location: "Myanmar Border", severity: "High" },
+                  { id: 2, title: "New Route Detected", location: "Laos", severity: "Medium" }
+                ]}
+                onDeleteAlert={() => {}}
+              />
+              <SupplyChain />
+            </div>
           </TabsContent>
 
-          <TabsContent value="settings">
-            {/* Settings content will be implemented in next iteration */}
-            <Card>
-              <CardContent className="p-6">
-                <p className="text-muted-foreground">Settings panel coming soon...</p>
-              </CardContent>
-            </Card>
+          <TabsContent value="settings" className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Lock className="w-5 h-5 text-primary" />
+                    <CardTitle>Security Settings</CardTitle>
+                  </div>
+                  <CardDescription>Access control and permissions</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-accent/50">
+                    <div>
+                      <div className="font-medium">Two-Factor Authentication</div>
+                      <div className="text-sm text-muted-foreground">Enhanced security</div>
+                    </div>
+                    <Button variant="outline" size="sm">Configure</Button>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-accent/50">
+                    <div>
+                      <div className="font-medium">API Access Keys</div>
+                      <div className="text-sm text-muted-foreground">Manage API credentials</div>
+                    </div>
+                    <Button variant="outline" size="sm">Manage</Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Users className="w-5 h-5 text-primary" />
+                    <CardTitle>User Management</CardTitle>
+                  </div>
+                  <CardDescription>Control user access and roles</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-accent/50">
+                    <div>
+                      <div className="font-medium">Team Members</div>
+                      <div className="text-sm text-muted-foreground">12 active users</div>
+                    </div>
+                    <Button variant="outline" size="sm">Manage</Button>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-accent/50">
+                    <div>
+                      <div className="font-medium">Role Assignments</div>
+                      <div className="text-sm text-muted-foreground">Access levels</div>
+                    </div>
+                    <Button variant="outline" size="sm">Configure</Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <Settings2 className="w-5 h-5 text-primary" />
+                    <CardTitle>System Settings</CardTitle>
+                  </div>
+                  <CardDescription>General configuration options</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-accent/50">
+                    <div>
+                      <div className="font-medium">Notifications</div>
+                      <div className="text-sm text-muted-foreground">Alert preferences</div>
+                    </div>
+                    <Button variant="outline" size="sm">Configure</Button>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-accent/50">
+                    <div>
+                      <div className="font-medium">System Language</div>
+                      <div className="text-sm text-muted-foreground">English (US)</div>
+                    </div>
+                    <Button variant="outline" size="sm">Change</Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2">
+                    <AlertTriangle className="w-5 h-5 text-primary" />
+                    <CardTitle>Alert Configuration</CardTitle>
+                  </div>
+                  <CardDescription>Notification and alert settings</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-accent/50">
+                    <div>
+                      <div className="font-medium">Alert Thresholds</div>
+                      <div className="text-sm text-muted-foreground">Risk level settings</div>
+                    </div>
+                    <Button variant="outline" size="sm">Adjust</Button>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-accent/50">
+                    <div>
+                      <div className="font-medium">Distribution Lists</div>
+                      <div className="text-sm text-muted-foreground">Alert recipients</div>
+                    </div>
+                    <Button variant="outline" size="sm">Manage</Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
+
         </Tabs>
       </div>
     </div>
