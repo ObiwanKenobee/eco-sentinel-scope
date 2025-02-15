@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import QueryBox from "@/components/QueryBox";
 import Stats from "@/components/Stats";
 import RecentActivity from "@/components/RecentActivity";
-import { Shield, ArrowRight, Map, BarChart3, Bell } from 'lucide-react';
+import { Shield, ArrowRight, Map, BarChart3, Bell, Brain, Network, Bot } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -17,6 +17,24 @@ const Index = () => {
     { name: "Rhinos", risk: "High", region: "Africa", trend: "-15%" },
   ];
 
+  const agentCards = [
+    {
+      title: "Wildlife Trafficking Intelligence",
+      icon: <Brain className="w-8 h-8 text-primary" />,
+      description: "AI-powered tracking and analysis of illegal wildlife trade movements",
+    },
+    {
+      title: "Supply Chain Compliance",
+      icon: <Network className="w-8 h-8 text-primary" />,
+      description: "Cross-references business supply chains to detect illegal activities",
+    },
+    {
+      title: "Law Enforcement Alerting",
+      icon: <Bell className="w-8 h-8 text-primary" />,
+      description: "Real-time alerts for conservation agencies and border patrol units",
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
@@ -25,17 +43,48 @@ const Index = () => {
         <div className="text-center mb-12 relative">
           <div className="inline-flex items-center justify-center p-2 rounded-full bg-accent mb-6">
             <Shield className="w-6 h-6 text-primary mr-2" />
-            <span className="text-sm font-medium">Wildlife Protection Intelligence</span>
+            <span className="text-sm font-medium">AI-Powered Wildlife Protection</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-gradient-primary">
-            Combat Wildlife Crime with AI
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/50">
+            Revolutionizing Wildlife Crime Prevention with AI-Powered Agents
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Advanced analytics and real-time intelligence to protect endangered species
-            and track illegal wildlife trafficking.
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+            Our AI-driven ecosystem detects, predicts, and prevents illegal wildlife trade through 
+            advanced analytics and real-time intelligence.
           </p>
+          <div className="flex items-center justify-center gap-4">
+            <Button size="lg" className="gap-2">
+              Explore Agents
+              <Bot className="w-4 h-4" />
+            </Button>
+            <Button size="lg" variant="outline" className="gap-2">
+              Get Involved
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
         <QueryBox />
+      </section>
+
+      {/* AI Agents Section */}
+      <section className="container py-12">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold mb-4">Specialized AI Agents</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Our intelligent agents work together to create a comprehensive wildlife protection system
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {agentCards.map((agent, index) => (
+            <Card key={index} className="group hover:bg-accent/50 transition-all duration-300">
+              <CardHeader>
+                <div className="mb-4">{agent.icon}</div>
+                <CardTitle>{agent.title}</CardTitle>
+                <CardDescription>{agent.description}</CardDescription>
+              </CardHeader>
+            </Card>
+          ))}
+        </div>
       </section>
 
       {/* Quick Access Cards */}
