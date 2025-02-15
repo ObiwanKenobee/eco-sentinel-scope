@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import QueryBox from "@/components/QueryBox";
@@ -53,9 +52,11 @@ const Index = () => {
             advanced analytics and real-time intelligence.
           </p>
           <div className="flex items-center justify-center gap-4">
-            <Button size="lg" className="gap-2">
-              Explore Agents
-              <Bot className="w-4 h-4" />
+            <Button size="lg" className="gap-2" asChild>
+              <Link to="/agents">
+                Explore Agents
+                <Bot className="w-4 h-4" />
+              </Link>
             </Button>
             <Button size="lg" variant="outline" className="gap-2">
               Get Involved
